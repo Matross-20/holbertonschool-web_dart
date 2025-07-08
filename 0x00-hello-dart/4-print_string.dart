@@ -1,5 +1,5 @@
 void main() {
-  String str = "Holberton School";
-   print(str*3);
-   print("Holberton\n");
+  const str = 'Holberton School';
+  print(str + str + str); // prints three times
+  print('Holberton');      // single trailing newline
 }
