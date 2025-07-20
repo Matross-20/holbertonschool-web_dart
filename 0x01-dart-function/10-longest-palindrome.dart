@@ -1,27 +1,39 @@
-String longestPalindrome(String s) {
-  if (s.isEmpty) return "";
-
-  int start = 0;
-  int end = 0;
-
-  for (int i = 0; i < s.length; i++) {
-    int len1 = _expandAroundCenter(s, i, i);
-    int len2 = _expandAroundCenter(s, i, i + 1);
-    int len = len1 > len2 ? len1 : len2;
-
-    if (len > end - start) {
-      start = i - (len - 1) ~/ 2;
-      end = i + len ~/ 2;
-    }
-  }
-
-  return s.substring(start, end + 1);
+bool isAlphaNumeric(String s) {
+  return s.codeUnits.every((int c) => c >= 'a'.codeUnitAt(0) && c <= 'z'.codeUnitAt(0) || c >= 'A'.codeUnitAt(0) && c <= 'Z'.codeUnitAt(0) || c >= '0'.codeUnitAt(0) && c <= '9'.codeUnitAt(0));
 }
 
-int _expandAroundCenter(String s, int left, int right) {
-  while (left >= 0 && right < s.length && s[left] == s[right]) {
-    left--;
-    right++;
+bool isPalindrome(String s) {
+  var i = 0;
+  var j = s.length - 1;
+  if (s.length < 3) {
+    return false;
   }
-  return right - left - 1;
+  while (i < j) {
+    while (i < j && !isAlphaNumeric(s[i])) {
+      i++;
+    }
+    while (i < j && !isAlphaNumeric(s[j])) {
+      j--;
+    }
+    if (s[i].toLowerCase() != s[j].toLowerCase()) {
+      return false;
+    }
+    i++;
+    j--;
+  }
+  return true;
+}
+String longestPalindrome(String s) {
+  if (s.length < 3) return 'none';
+  String longest = '';
+  String current = '';
+  for (int i = 0; i < s.length; i++) {
+    for (int j = i; j < s.length; j++) {
+      current = s.substring(i, j + 1);
+      if (isPalindrome(current) && current.length > longest.length) {
+        longest = current;
+      }
+    }
+  }
+  return longest != '' ? longest : 'none';
 }
