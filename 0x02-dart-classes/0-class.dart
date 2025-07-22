@@ -1,6 +1,10 @@
 class User {
-    String name = '';
-    String showname(){
-        return "Hello ${name}";
-    }
+  String name;
+  int age;
+
+  User(this.name, this.age);
+
+  String showName() {
+    return name;
+  }
 }

@@ -1,7 +1,6 @@
 import '0-class.dart';
 
 void main() {
-    final firstPer = User();
-    firstPer.name = "Youssef Belhadj";
-    print(firstPer.showName());
+  User firstPer = User("Youssef Belhadj", 25);
+  print(firstPer.showName()); // Should print: Alice
 }
