@@ -40,7 +40,8 @@ class User extends Password {
 
   // Override toString method
   @override
-  String toString() {
-    return 'User(id : $id ,name: $name, age: $age, height: $height, Password: ${isValid()})';
+String toString() {
+  super.password = this.user_password;
+  return 'User(id : $id ,name: $name, age: $age, height: $height, Password: ${super.isValid()})';
   }
 }
