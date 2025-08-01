@@ -1,40 +1,40 @@
 class Password {
+  // PROPRIETE
   String _password;
 
+  // CONSTRUCTEUR
   Password({required String password}) : _password = password;
 
+  // Getter for the password value
+  String get password => _password;
+
+  // Setter for the password value
+  set password(String newPassword) {
+    _password = newPassword;
+  }
+
   bool isValid() {
+    // Verify if the password length is between 8 and 16 characters
     if (_password.length < 8 || _password.length > 16) {
       return false;
     }
-
-    if (!_containsUppercase() || !_containsLowercase() || !_containsNumbers()) {
+    // Verify if the password contains at least one uppercase letter
+    if (_password.contains(RegExp(r'[A-Z]')) == false) {
       return false;
     }
-
+    // Verify if the password contains at least one lowercase letter
+    if (_password.contains(RegExp(r'[a-z]')) == false) {
+      return false;
+    }
+    // Verify if the password contains at least one digit
+    if (_password.contains(RegExp(r'[0-9]')) == false) {
+      return false;
+    }
     return true;
-  }
-
-  bool _containsUppercase() {
-    return _password.contains(RegExp(r'[A-Z]'));
-  }
-
-  bool _containsLowercase() {
-    return _password.contains(RegExp(r'[a-z]'));
-  }
-
-  bool _containsNumbers() {
-    return _password.contains(RegExp(r'[0-9]'));
-  }
-
-  String get password => _password;
-
-  set password(String value) {
-    _password = value;
   }
 
   @override
   String toString() {
-    return "Your Password is: $_password";
+    return 'Your Password is: $_password';
   }
 }
