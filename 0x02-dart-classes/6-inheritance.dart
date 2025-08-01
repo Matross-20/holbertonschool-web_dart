@@ -1,48 +1,35 @@
 import '6-password.dart';
 
-class User extends Password {
-  String? name;
-  int? age;
-  double? height;
-  int? id;
-  String user_password = '';
+class User {
+  int id;
+  String name;
+  int age;
+  double height;
+  String? user_password;
 
-  User({
-    required int id,
-    required String name,
-    required int age,
-    required double height,
-    required String user_password,
-  }) : super(password: user_password) {
-    this.id = id;
-    this.name = name;
-    this.age = age;
-    this.height = height;
-    this.user_password = user_password;
+
+  User({required this.id , required this.name, required this.age, required this.height, this.user_password,});
+
+  bool isPasswordValid() {
+    Password pwd = Password(password: user_password ?? "");
+    return pwd.isValid();
+  }
+  Map<String, dynamic> toJson() {
+    return {'id': id, 'name': name, 'age': age, 'height': height};
   }
 
-  static User fromJson(Map<String, dynamic> userJson) {
+  static User fromJson(Map<dynamic, dynamic> userJson) {
     return User(
       id: userJson['id'],
       name: userJson['name'],
       age: userJson['age'],
       height: userJson['height'],
-      user_password: userJson['user_password'] ?? '',
+      user_password: userJson['user_password'],
     );
-  }
-
-  Map toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'age': age,
-      'height': height,
-    };
   }
 
   @override
   String toString() {
-    super.password = user_password; // Sync with parent class
-    return 'User(id : $id ,name: $name, age: $age, height: $height, Password: ${super.isValid()})';
+    return 'User(id : $id ,name: $name, age: $age, height: $height, Password: ${isPasswordValid()})';
   }
 }
