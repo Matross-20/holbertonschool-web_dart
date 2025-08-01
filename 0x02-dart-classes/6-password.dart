@@ -1,36 +1,22 @@
 class Password {
-  // PROPRIETE
-  String _password;
+  String _password = '';
 
-  // CONSTRUCTEUR
-  Password({required String password}) : _password = password;
+  Password({required String password}) {
+    this._password = password;
+  }
 
-  // Getter for the password value
   String get password => _password;
 
-  // Setter for the password value
-  set password(String newPassword) {
-    _password = newPassword;
+  set password(String password) {
+    _password = password;
   }
 
   bool isValid() {
-    // Verify if the password length is between 8 and 16 characters
-    if (_password.length < 8 || _password.length > 16) {
-      return false;
-    }
-    // Verify if the password contains at least one uppercase letter
-    if (_password.contains(RegExp(r'[A-Z]')) == false) {
-      return false;
-    }
-    // Verify if the password contains at least one lowercase letter
-    if (_password.contains(RegExp(r'[a-z]')) == false) {
-      return false;
-    }
-    // Verify if the password contains at least one digit
-    if (_password.contains(RegExp(r'[0-9]')) == false) {
-      return false;
-    }
-    return true;
+    return _password.length >= 8 &&
+        _password.length <= 16 &&
+        _password.contains(RegExp(r'[A-Z]')) &&
+        _password.contains(RegExp(r'[a-z]')) &&
+        _password.contains(RegExp(r'[0-9]'));
   }
 
   @override
